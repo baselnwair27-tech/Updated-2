@@ -67,10 +67,6 @@
             </div>
             <button type="button" class="subscreen-button" data-screen="blind-status-detail">View details</button>
           </div>
-          <div class="screen-row">
-            <span>Location</span>
-          <strong id="emergencyLocation">Loading...</strong>
-          </div>
 
           <div class="screen-view" data-screen="blind-status-detail">
             <p class="screen-badge red">Blind Status Detail</p>
@@ -407,7 +403,6 @@
       if (data && data.emergency) {
         const emergencyDateEl = document.getElementById('emergencyDate');
         const emergencyTimeEl = document.getElementById('emergencyTime');
-        const emergencyLocationEl = document.getElementById('emergencyLocation');
         const historyDateEl = document.getElementById('historyDate');
         const historyTimeEl = document.getElementById('historyTime');
 
@@ -418,10 +413,6 @@
         if (emergencyTimeEl) {
           emergencyTimeEl.textContent = data.emergency.time || 'No time';
         }
-        if (emergencyLocationE1) {
-          emergencyLocationEl.textContent = data.emergency.location || 'Unkown location';
-        }
-
         if (historyDateEl) {
           historyDateEl.textContent = data.emergency.date || 'No date';
         }
