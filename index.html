@@ -125,6 +125,7 @@
             </div>
             <a id="openLocationBtn"
               class="subscreen-button"
+              href="#"
               target="_blank">
               Open current location
             </a>
@@ -464,14 +465,13 @@
           locationLngEl.textContent = lng || 'No longitude';
         }
         if (locationDateEl) {
-          locationDateEl.textContent = dat.gps.date || 'No date';
+          locationDateEl.textContent = data.gps.date || 'No date';
         }
         if (locationTimeEl) {
-          locationTimeEl.textContent = dat.gps.time || 'No time';
+          locationTimeEl.textContent = data.gps.time || 'No time';
         }
         if (openLocationBtn && lat && lng) {
-          openLocationBtn.href =
-            `https://www.google.com/maps?q=${lat},${lng}`;
+          openLocationBtn.href ="https://www.google.com/maps?q=" + lat + "," + lng;
         }
       }
       // Device and WiFi status
