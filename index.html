@@ -418,6 +418,9 @@
         if (emergencyTimeEl) {
           emergencyTimeEl.textContent = data.emergency.time || 'No time';
         }
+        if (emergencyLocationE1) {
+          emergencyLocationEl.textContent = data.emergency.location || 'Unkown location';
+        }
 
         if (historyDateEl) {
           historyDateEl.textContent = data.emergency.date || 'No date';
