@@ -50,6 +50,11 @@
           <li><button type="button" class="menu-button" data-screen="device-status">Device Status</button></li>
           <li><button type="button" class="menu-button" data-screen="ai-chat">AI Chat</button></li>
           <li><button type="button" class="menu-button" data-screen="contact-us">Contact Us</button></li>
+          <li>
+            <button type="button" class="menu-button" data-screen="location-monitoring">
+              Location Monitoring
+            </button>
+          </li>
         </ul>
         <button class="footer-link" data-screen="settings">Settings</button>
 
@@ -101,6 +106,28 @@
               </div>
             </div>
             <button class="clear-history">Clear History</button>
+          </div>
+          <div class="screen-view" data-screen="location-monitoring">
+            <p class="screen-badge green">SAFE</p>
+            <h4>Location Monitoring</h4>
+            <p id="locationStatus">Isnide safe zone</p>
+            <div class="screen-row">
+              <span>Latitude</span>
+              <strong id="locationLat">Loading...</strong>
+            </div>
+          <div class="screen-row">
+            <span>Longitude</span>
+            <strong id="locationLng">Loading...</strong>
+          </div>
+            <div class="screen-row">
+              <span>Time</span>
+              <strong id="locationTime">Loading...</strong>
+            </div>
+            <a id="openLocationBtn"
+              class="subscreen-button"
+              target="_blank">
+              Open current location
+            </a>
           </div>
 
           <div class="screen-view" data-screen="device-status">
@@ -421,7 +448,32 @@
           historyTimeEl.textContent = data.emergency.time || 'No time';
         }
       }
-
+// Location Monitoring 
+      const locationLatEl = document.getElementById('locationLat');
+      const locationLngEl = document.getElementById('locationLng');
+      const locationDateEl = document.getElementById('locationDate');
+      const locationTimeEl = document.getElementById('locationTime');
+      const openLocationBtn = document.getElementById('openLocationBtn');
+      if (data && data.location) {
+        const lat = data.location.latitude;
+        const lng = data.location.longitude;
+        if (locationLatEl) {
+          locationLatEl.textContent = lat || 'No latitude';
+        }
+        if (locationLngEl) {
+          locationLngEl.textContent = lng || 'No longitude';
+        }
+        if (locationDateEl) {
+          locationDateEl.textContent = dat.location.date || 'No date';
+        }
+        if (locationTimeEl) {
+          locationTimeEl.textContent = dat.location.time || 'No time';
+        }
+        if (openLocationBtn && lat && lng) {
+          openLocationBtn.href =
+            `https://www.google.com/maps?q=${lat},${lng}`;
+        }
+      }
       // Device and WiFi status
       if (data && data.device_status) {
         updateDeviceStatus(
