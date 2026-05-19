@@ -110,7 +110,7 @@
           <div class="screen-view" data-screen="location-monitoring">
             <p class="screen-badge green">SAFE</p>
             <h4>Location Monitoring</h4>
-            <p id="locationStatus">Isnide safe zone</p>
+            <p id="locationStatus">Inside safe zone</p>
             <div class="screen-row">
               <span>Latitude</span>
               <strong id="locationLat">Loading...</strong>
@@ -454,9 +454,9 @@
       const locationDateEl = document.getElementById('locationDate');
       const locationTimeEl = document.getElementById('locationTime');
       const openLocationBtn = document.getElementById('openLocationBtn');
-      if (data && data.location) {
-        const lat = data.location.latitude;
-        const lng = data.location.longitude;
+      if (data && data.gps) {
+        const lat = data.gps.latitude;
+        const lng = data.gps.longitude;
         if (locationLatEl) {
           locationLatEl.textContent = lat || 'No latitude';
         }
@@ -464,10 +464,10 @@
           locationLngEl.textContent = lng || 'No longitude';
         }
         if (locationDateEl) {
-          locationDateEl.textContent = dat.location.date || 'No date';
+          locationDateEl.textContent = dat.gps.date || 'No date';
         }
         if (locationTimeEl) {
-          locationTimeEl.textContent = dat.location.time || 'No time';
+          locationTimeEl.textContent = dat.gps.time || 'No time';
         }
         if (openLocationBtn && lat && lng) {
           openLocationBtn.href =
