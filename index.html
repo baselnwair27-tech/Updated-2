@@ -94,6 +94,8 @@
 
           <div class="screen-view" data-screen="history">
             <p class="screen-badge orange">History</p>
+            <p>Loading history...</p>
+          </div>
             <h4>Emergency History</h4>
             <div class="history-events" id="historyEvents">
               <div class="screen-row">
@@ -431,8 +433,6 @@
       if (data && data.emergency) {
         const emergencyDateEl = document.getElementById('emergencyDate');
         const emergencyTimeEl = document.getElementById('emergencyTime');
-        const historyDateEl = document.getElementById('historyDate');
-        const historyTimeEl = document.getElementById('historyTime');
 
         if (emergencyDateEl) {
           emergencyDateEl.textContent = data.emergency.date || 'No date';
@@ -450,12 +450,24 @@
           message: data.emergency.message || "Emergency"
         });
         }
-        if (historyDateEl) {
-          historyDateEl.textContent = data.emergency.date || 'No date';
-        }
-
-        if (historyTimeEl) {
-          historyTimeEl.textContent = data.emergency.time || 'No time';
+      }
+      // History List
+      const historyEventsEl = document.getElementById('historyEvents');
+      if (historyEventsEl) {
+        historyEventsEl.innerHTML ='';
+        if (data && data.history) {
+          const historyItems = Object.value(data.history).reverse();
+          historyItems.forEach(item) => {
+            const historyItem = document.createElement('div');
+            historyItem.className = 'screen-row';
+            historyItem.innerHTML = `
+            <span>${item.date || 'No date'}<br>${item.message || 'Emergency'}</span>
+            <strong>${item.time || 'No time'}</strong>
+            `;
+            historyEventsEl.appendChild(historyItem);
+          });
+        } else{
+          historyEventsEl.innerHTML = '<p>No history available</p>';
         }
       }
 // Location Monitoring 
