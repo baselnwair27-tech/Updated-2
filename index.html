@@ -467,9 +467,11 @@
       const locationDateEl = document.getElementById('locationDate');
       const locationTimeEl = document.getElementById('locationTime');
       const openLocationBtn = document.getElementById('openLocationBtn');
+      const locationStatusEl = document.getElementById('locationStatus');
       if (data && data.gps) {
         const lat = data.gps.latitude;
         const lng = data.gps.longitude;
+        if (locationStatusEl) locationStatusEl.textContent = data.gps.status || 'Unknown status';
         if (locationLatEl) {
           locationLatEl.textContent = lat || 'No latitude';
         }
