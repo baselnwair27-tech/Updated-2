@@ -441,6 +441,15 @@
         if (emergencyTimeEl) {
           emergencyTimeEl.textContent = data.emergency.time || 'No time';
         }
+        if (data.emergency.date && data.emergency.time) {
+        const savedKey = data.emergency.date + "_" + data.emergency.time;
+        db.ref("history/" + savedKey).set ({
+          date: data.emergency.date,
+          time: data.emergency.time,
+          status: data.emergency.status || "SOS",
+          message: data.emergency.message || "Emergency"
+        });
+        }
         if (historyDateEl) {
           historyDateEl.textContent = data.emergency.date || 'No date';
         }
