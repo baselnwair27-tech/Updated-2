@@ -451,25 +451,6 @@
         });
         }
       }
-      // History List
-      const historyEventsEl = document.getElementById('historyEvents');
-      if (historyEventsEl) {
-        historyEventsEl.innerHTML ='';
-        if (data && data.history) {
-          const historyItems = Object.value(data.history).reverse();
-          historyItems.forEach(item) => {
-            const historyItem = document.createElement('div');
-            historyItem.className = 'screen-row';
-            historyItem.innerHTML = `
-            <span>${item.date || 'No date'}<br>${item.message || 'Emergency'}</span>
-            <strong>${item.time || 'No time'}</strong>
-            `;
-            historyEventsEl.appendChild(historyItem);
-          });
-        } else {
-          historyEventsEl.innerHTML = '<p>No history available</p>';
-        }
-      }
 // Location Monitoring 
       const locationLatEl = document.getElementById('locationLat');
       const locationLngEl = document.getElementById('locationLng');
