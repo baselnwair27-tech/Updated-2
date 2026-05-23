@@ -446,10 +446,10 @@
       //History List
       const historyEventsEl = document.getElementById('historyEvents');
       if (historyEventsEl) {
-        historyEevntsEl.innerHTML = '';
+        historyEventsEl.innerHTML = '';
         if (data && data.history) {
           const historyItems = Object.values(data.history).reverse();
-          historyItems.forEach((item) => {
+          historyItems.forEach(item) => {
             const historyItem = document.createElement('div');
             historyItem.className = 'screen-row';
             historyItem.innerHTML = `
@@ -459,7 +459,7 @@
             historyEventsEl.appendChild(historyItem);
           });
         } else {
-          historyEventsEl.innerHTML = '<p>No history available</p>';
+          historyEventsEl.innerHTML =  '<p>No history available</p>';
         }
       }
 // Location Monitoring 
