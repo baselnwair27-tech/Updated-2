@@ -443,29 +443,6 @@
         });
         }
       }
-      // History List
-     try {
-       const historyBox = document.getElementById('historyEvents');
-       if (historyBox) {
-         historyBox.innerHTML = '';
-         if (data && data.history) {
-           const historyItems = Object,values(data.history).reverse();
-           historyItems.forEach((item) => {
-             const row = document.createElement('div');
-             row.className = 'screen-row';
-             row.innerHTML = `
-             <span>${item.date || 'No date'}<br>${item.message || 'Emergency'}</span>
-             <strong>${item.time || 'No time'}</strong>
-             `;
-             historyBox.appendChild(row);
-           });
-         } else {
-           historyBox.innerHTML = '<p>No history available</p>';
-         }
-       }
-     } catch (error) {
-       console.log('History error:', error);
-     }
 // Location Monitoring 
    const locationLatEl = document.getElementById('locationLat');
       const locationLngEl = document.getElementById('locationLng');
