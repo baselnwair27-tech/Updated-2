@@ -443,23 +443,6 @@
         });
         }
       }
-// History List
-      const historyBox = document.getElementById('historyEvents');
-      if (historyBox) {
-        historyBox.innerHTML = '';
-        if (data && data.history) {
-          const historyItems= Object.values(data.history).reverse();
-          historyItems.forEach((item) => {
-            const row = document.createElement('div;);
-                                               row.className = 'screen-row';
-            row.innerHTML =
-              '<span>' + (item.date || 'No date') + '<br>' + (item.message || 'Emergency') + '</span>' +
-              historyBox.appendChild(row);
-          });
-        } else {
-          historyBox.innerHTML = '<p>No history available</p>';
-        }
-      }
 // Location Monitoring 
    const locationLatEl = document.getElementById('locationLat');
       const locationLngEl = document.getElementById('locationLng');
@@ -605,6 +588,27 @@
     });
 
     startOfflineTimeout();
+    // Separate History Listener
+    firebase.database().ref("history").on("value", function(snapshot) {
+      var historyBox = document.getElementById("historyEvents");
+      if (!historyBox) return;
+      historyBox.innerHTML = "";
+      var historyDate = snapshot.val();
+      if (!historyData) {
+        historyBox.innerHTML = "<p>No history available</p>";
+        return;
+      }
+      var historyItems = Object.values(historyData).reverse();
+      historyItems.forEach(function(item) {
+        var row = document.createElement("div");
+        row.className = "screen-row";
+        row.innerHTML =
+          "<span>" + (item.date || "No date") + "<br>" +
+          (item.message || "Emergency") + "</span>" +
+          "<strong>" + (item.time || "No time") + "</strong>";
+        historyBox.appendChild(row);
+      });
+    });
   </script>
 </body>
 </html>
