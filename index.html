@@ -415,6 +415,26 @@
   try {
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
+    db.ref("history").on("value", function(snapshot) {
+      const historyBox = document.getElementById("historyEvents");
+      if (!historyBox) return;
+      historyBox.innerHTML = "";
+      var historyData = snapshot.val();
+      if (!historyData) {
+        historyBox.innerHTML = "<p>No history available</p>";
+        return;
+      }
+      var historyItems = Object.values(historyData).reverse();
+      historyItems.forEach(function(item) {
+        var row = document.createElement("div");
+        row.className = "screen-row";
+        row.innerHTML =
+          "<span>" + (item.date || "No date") + "<br>" +
+          (item.message || "Emergency") + "</span>" +
+          "<strong>" + (item.time || "No time") + "</strong>";
+        historyBox.appendChild(row);
+      });
+    });
     const rootRef = db.ref('/');
 
     rootRef.on('value', (snapshot) => {
@@ -588,27 +608,6 @@
     });
 
     startOfflineTimeout();
-    // Separate History Listener
-    firebase.database().ref("history").on("value", function(snapshot) {
-      var historyBox = document.getElementById("historyEvents");
-      if (!historyBox) return;
-      historyBox.innerHTML = "";
-      var historyDate = snapshot.val();
-      if (!historyData) {
-        historyBox.innerHTML = "<p>No history available</p>";
-        return;
-      }
-      var historyItems = Object.values(historyData).reverse();
-      historyItems.forEach(function(item) {
-        var row = document.createElement("div");
-        row.className = "screen-row";
-        row.innerHTML =
-          "<span>" + (item.date || "No date") + "<br>" +
-          (item.message || "Emergency") + "</span>" +
-          "<strong>" + (item.time || "No time") + "</strong>";
-        historyBox.appendChild(row);
-      });
-    });
   </script>
 </body>
 </html>
