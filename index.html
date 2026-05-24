@@ -439,7 +439,7 @@
 
     rootRef.on('value', (snapshot) => {
       const data = snapshot.val();
-      // firebaseOutput.textContent = JSON.stringify(data, null, 2);
+      firebaseOutput.textContent = JSON.stringify(data, null, 2);
 
       // Emergency date and time
       if (data && data.emergency) {
