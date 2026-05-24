@@ -608,6 +608,12 @@
     });
 
     startOfflineTimeout();
+    const clearHistoryBtn = document.querySelector('.clear-history');
+    if (clearHistoryBtn) {
+      clearHistoryBtn.addEventListener('click', function () {
+        firebase.database().ref('history').remove();
+      });
+    }
   </script>
 </body>
 </html>
